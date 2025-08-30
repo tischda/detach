@@ -1,30 +1,24 @@
-﻿# go-cli-template
+[![Build Status](https://github.com/tischda/detach/actions/workflows/build.yml/badge.svg)](https://github.com/github.com/tischda/detach/actions/workflows/build.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/tischda/detach)](https://goreportcard.com/report/github.com/tischda/detach)
 
-Template for small [Go](https://www.golang.org) CLI projects.
+# detach
 
-## Get started
+Description here.
 
-Name your project:
-~~~
-set PROJECT=my-project
-~~~
-
-Create repository and project folder with [Github CLI](https://github.com/cli/cli):
-~~~
-gh config set git_protocol ssh
-cd %PROJECT% || gh repo create %PROJECT% --public --clone --template github.com/tischda/go-cli-template
-cd %PROJECT%
-init-project.cmd
-~~~
-
-Start coding.
-
-## Release project
+### Install
 
 ~~~
-make test
+go install github.com/tischda/detach@latest
+~~~
 
-git tag -a v1.0.0 -m "First release"
-git push origin v1.0.0
-make release
+### Usage
+
+~~~
+Output of detach --help command here.
+~~~
+
+### Examples
+
+~~~
+
 ~~~
