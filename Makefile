@@ -6,7 +6,7 @@
 
 PROJECT_NAME=$(shell git rev-parse --show-toplevel | xargs basename )
 VERSION=$(shell git describe --tags --always --dirty 2>/dev/null || echo "1.0.0-dev")
-BUILD_DATE=$(shell date -u "+%Y-%m-%d %H:%M:%S UTC")
+BUILD_DATE=$(shell date -u "+%Y-%m-%dT%H:%M:%SZ")
 GIT_COMMIT=$(shell git rev-parse --short HEAD 2>/dev/null || echo "unknown")
 LDFLAGS=-ldflags=all="-s -w -X \"main.name=$(PROJECT_NAME)\" -X \"main.version=$(VERSION)\" -X \"main.date=$(BUILD_DATE)\" -X \"main.commit=$(GIT_COMMIT)\""
 
@@ -69,7 +69,8 @@ clean:
 ## version: show version info
 version:
 	@echo "$(PROJECT_NAME) $(VERSION), built on $(BUILD_DATE) (commit: $(GIT_COMMIT))"
-	@echo "LDFLAGS: $(LDFLAGS)"
+	@echo "LDFLAGS:"
+	@echo "    $(LDFLAGS)"
 
 ## help: display this help
 help: Makefile

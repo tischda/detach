@@ -6,10 +6,10 @@ vars:
   VERSION:
     sh: bash -c 'git describe --tags --always --dirty 2>/dev/null || echo "1.0.0-dev"'
   BUILD_DATE:
-    sh: bash -c 'date -u "+%Y-%m-%d %H:%M:%S UTC"'
+    sh: bash -c 'date -u "+%Y-%m-%dT%H:%M:%SZ"'
   GIT_COMMIT:
     sh: bash -c 'git rev-parse --short HEAD 2>/dev/null || echo "unknown"'
-  LDFLAGS: -ldflags=all="-s -w -X 'main.name={{.PROJECT_NAME}}' -X 'main.version={{.VERSION}}' -X 'main.date={{.BUILD_DATE}}' -X 'main.commit={{.GIT_COMMIT}}'"
+  LDFLAGS: -ldflags=all="-s -w -X \'main.name={{.PROJECT_NAME}}\' -X \'main.version={{.VERSION}}\' -X \'main.date={{.BUILD_DATE}}\' -X \'main.commit={{.GIT_COMMIT}}\'"
 
 tasks:
   build:
@@ -71,4 +71,5 @@ tasks:
     desc: Show version information
     cmds:
       - "echo {{.PROJECT_NAME}} {{.VERSION}}, built on {{.BUILD_DATE}} \\(commit: {{.GIT_COMMIT}}\\)"
-      - "echo LDFLAGS: {{.LDFLAGS}}"
+      - "echo LDFLAGS:"
+      - echo "    {{.LDFLAGS}}"
