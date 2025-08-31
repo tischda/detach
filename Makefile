@@ -52,7 +52,7 @@ release:
 	@echo releasing ${VERSION}
 	@sed '1,/\#\# \[${VERSION}/d;/^\#\# /Q' CHANGELOG.md > releaseinfo
 	@cat releaseinfo
-	goreleaser release --clean --release-notes=releaseinfo
+	@set LDFLAGS=${LDFLAGS} && goreleaser release --clean --release-notes=releaseinfo
 	@rm -f releaseinfo
 
 
