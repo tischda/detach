@@ -11,6 +11,8 @@ builds:
       - CGO_ENABLED=0
     goos:
       - windows
+    ldflags:
+      - '{{ .Env.LDFLAGS }}'
 
 archives:   
   # make OS and Arch compatible with the results of `uname`
