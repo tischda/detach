@@ -21,7 +21,7 @@ go install github.com/tischda/detach@latest
 ### Usage
 
 ~~~
-Usage: detach cmdPath cmdArgs... | [ version | --version | --help ]
+Usage: detach [OPTIONS] cmdPath cmdArgs...
 
 OPTIONS:
 

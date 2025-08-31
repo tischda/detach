@@ -24,7 +24,7 @@ func init() {
 
 func main() {
 	flag.Usage = func() {
-		fmt.Fprintln(os.Stderr, "Usage: "+name+` cmdPath cmdArgs... | [ version | --version | --help ]
+		fmt.Fprintln(os.Stderr, "Usage: "+name+` [OPTIONS] cmdPath cmdArgs...
 
 Starts a new process specified by cmdPath and cmdArgs in a detached state on Windows.
 The new process will not be attached to the current console and will run independently.
