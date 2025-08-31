@@ -53,7 +53,7 @@ release:
 	@sed '1,/\#\# \[${VERSION}/d;/^\#\# /Q' CHANGELOG.md > releaseinfo
 	@cat releaseinfo
 	@echo ----
-	@goreleaser release --clean --release-notes=releaseinfo --skip=validate
+	@goreleaser release --clean --release-notes=releaseinfo
 	@rm -f releaseinfo
 
 ## dist: clean and build

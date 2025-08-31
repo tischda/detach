@@ -12,7 +12,7 @@ builds:
     goos:
       - windows
     ldflags:
-      - -s -w -X main.name={{.ProjectName}} -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}} -X main.builtBy=goreleaser
+      - -s -w -X main.name={{.ProjectName}} -X main.version={{.Version}} -X main.commit={{.ShortCommit}} -X main.date={{.Date}} -X main.builtBy=goreleaser
 
 archives:   
   # make OS and Arch compatible with the results of `uname`
