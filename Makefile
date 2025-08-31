@@ -8,7 +8,7 @@ PROJECT_NAME=$(shell git rev-parse --show-toplevel | xargs basename )
 VERSION=$(shell git describe --tags --always --dirty 2>/dev/null || echo "1.0.0-dev")
 BUILD_DATE=$(shell date -u "+%Y-%m-%d %H:%M:%S UTC")
 GIT_COMMIT=$(shell git rev-parse --short HEAD 2>/dev/null || echo "unknown")
-LDFLAGS=-ldflags=all="-s -w -X \"main.AppName=${PROJECT_NAME}\" -X \"main.AppVersion=${VERSION}\" -X \"main.BuildDate=${BUILD_DATE}\" -X \"main.GitCommit=${GIT_COMMIT}\""
+LDFLAGS=-ldflags=all="-s -w -X \"main.name=$(PROJECT_NAME)\" -X \"main.version=$(VERSION)\" -X \"main.date=$(BUILD_DATE)\" -X \"main.commit=$(GIT_COMMIT)\""
 
 
 MAKEFLAGS += --no-print-directory
@@ -17,7 +17,7 @@ all: build
 
 ## build: build project
 build:
-	go build ${LDFLAGS}
+	go build $(LDFLAGS)
 
 ## test: run tests with coverage
 test:
@@ -34,7 +34,7 @@ cover:
 
 ## install: build and install binary into workspace bin folder
 install:
-	go install ${LDFLAGS} ./...
+	go install $(LDFLAGS) ./...
 
 ## update: update dependencies
 update:
@@ -49,12 +49,12 @@ snapshot:
 
 ## release: make a release based on latest tag
 release: 
-	@echo releasing ${VERSION}
+	@echo releasing $(VERSION)
 	@sed '1,/\#\# \[${VERSION}/d;/^\#\# /Q' CHANGELOG.md > releaseinfo
 	@cat releaseinfo
-	@set LDFLAGS=${LDFLAGS} && goreleaser release --clean --release-notes=releaseinfo
+	@echo ----
+	@goreleaser release --clean --release-notes=releaseinfo --skip=validate
 	@rm -f releaseinfo
-
 
 ## dist: clean and build
 dist: clean build
@@ -69,7 +69,7 @@ clean:
 ## version: show version info
 version:
 	@echo "$(PROJECT_NAME) $(VERSION), built on $(BUILD_DATE) (commit: $(GIT_COMMIT))"
-	@echo "LDFLAGS: ${LDFLAGS}"
+	@echo "LDFLAGS: $(LDFLAGS)"
 
 ## help: display this help
 help: Makefile
