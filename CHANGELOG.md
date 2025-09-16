@@ -1,6 +1,6 @@
 # Changelog
 
-## [v1.1.0] - ?? September 2025
+## [v1.1.0] - 16 September 2025
 
 PsModulePath also needs to be merged
 

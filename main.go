@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"os"
 )
 
@@ -14,15 +15,24 @@ var (
 	commit  string
 )
 
-var flagHelp = flag.Bool("help", false, "displays this help message")
-var flagVersion = flag.Bool("version", false, "print version and exit")
+// flags
+type Config struct {
+	help    bool
+	version bool
+}
 
-func init() {
-	flag.BoolVar(flagHelp, "h", false, "")
-	flag.BoolVar(flagVersion, "v", false, "")
+func initFlags() *Config {
+	cfg := &Config{}
+	flag.BoolVar(&cfg.help, "?", false, "")
+	flag.BoolVar(&cfg.help, "help", false, "displays this help message")
+	flag.BoolVar(&cfg.version, "v", false, "")
+	flag.BoolVar(&cfg.version, "version", false, "print version and exit")
+	return cfg
 }
 
 func main() {
+	log.SetFlags(0)
+	cfg := initFlags()
 	flag.Usage = func() {
 		fmt.Fprintln(os.Stderr, "Usage: "+name+` [OPTIONS] cmdPath cmdArgs...
 
@@ -34,7 +44,7 @@ variables from the Windows registry.
 
 OPTIONS:
 
-  -h, --help
+  -?, --help
         display this help message
   -v, --version
         print version and exit
@@ -46,12 +56,12 @@ EXAMPLES:`)
 	}
 	flag.Parse()
 
-	if flag.Arg(0) == "version" || *flagVersion {
+	if flag.Arg(0) == "version" || cfg.version {
 		fmt.Printf("%s %s, built on %s (commit: %s)\n", name, version, date, commit)
 		return
 	}
 
-	if *flagHelp {
+	if cfg.help {
 		flag.Usage()
 		return
 	}
