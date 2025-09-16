@@ -27,7 +27,7 @@ Usage: detach [OPTIONS] cmdPath cmdArgs...
 
 OPTIONS:
 
-  -h, --help
+  -?, --help
         display this help message
   -v, --version
         print version and exit
