@@ -1,7 +1,9 @@
-[![Build Status](https://github.com/tischda/detach/actions/workflows/build.yml/badge.svg)](https://github.com/tischda/detach/actions/workflows/build.yml)
-[![Test Status](https://github.com/tischda/detach/actions/workflows/test.yml/badge.svg)](https://github.com/tischda/detach/actions/workflows/test.yml)
-[![Coverage Status](https://coveralls.io/repos/tischda/detach/badge.svg)](https://coveralls.io/r/tischda/detach)
-[![Go Report Card](https://goreportcard.com/badge/github.com/tischda/detach)](https://goreportcard.com/report/github.com/tischda/detach)
+[![Build Status](https://tischda/detach/actions/workflows/build.yml/badge.svg)](https://tischda/detach/actions/workflows/build.yml)
+[![Test Status](https://tischda/detach/actions/workflows/test.yml/badge.svg)](https://tischda/detach/actions/workflows/test.yml)
+[![Coverage Status](https://coveralls.io/repos/{{ .Owner }}/{{ .Project }}/badge.svg)](https://coveralls.io/r/{{ .Owner }}/{{ .Project }})
+[![Linter Status](https://github.com/tischda/detach/actions/workflows/linter.yml/badge.svg)](https://github.com/tischda/detach/actions/workflows/linter.yml)
+[![License](https://img.shields.io/github/license/tischda/detach)](/LICENSE)
+[![Release](https://img.shields.io/github/release/tischda/detach.svg)](https://github.com/tischda/detach/releases/latest)
 
 # detach
 
@@ -14,13 +16,13 @@ variables from the Windows registry.
 I wrote this utility because [refresh](https://github.com/tischda/refresh) can't update the environment when
 starting Alacritty from [`whkd`](https://github.com/LGUG2Z/whkd).
 
-### Install
+## Install
 
 ~~~
 go install github.com/tischda/detach@latest
 ~~~
 
-### Usage
+## Usage
 
 ~~~
 Usage: detach [OPTIONS] cmdPath cmdArgs...
@@ -33,7 +35,7 @@ OPTIONS:
         print version and exit
 ~~~
 
-### Examples
+## Examples
 
 From terminal
 ~~~
@@ -41,7 +43,7 @@ $ detach alacritty.exe
   2025/08/30 22:32:16 Started detached process 'alacritty.exe' with PID 34568
 ~~~
 
-whkd configuration (~\.config\whkdrc)
+whkd configuration (`~\.config\whkdrc`)
 ~~~
 .shell cmd
 
