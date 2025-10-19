@@ -33,7 +33,7 @@ func getUserAndSystemEnv() ([]string, error) {
 	// Read SYSTEM environment vars
 	sysReg, err := registry.OpenKey(registry.LOCAL_MACHINE, `SYSTEM\CurrentControlSet\Control\Session Manager\Environment`, registry.READ)
 	if err == nil {
-		defer sysReg.Close()
+		defer sysReg.Close()  //nolint:errcheck
 		sysEnv, _ := sysReg.ReadValueNames(0)
 		for _, name := range sysEnv {
 			val, _, _ := sysReg.GetStringValue(name)
@@ -44,7 +44,7 @@ func getUserAndSystemEnv() ([]string, error) {
 	// Read USER environment vars
 	userReg, err := registry.OpenKey(registry.CURRENT_USER, `Environment`, registry.READ)
 	if err == nil {
-		defer userReg.Close()
+		defer userReg.Close()  //nolint:errcheck
 		userEnv, _ := userReg.ReadValueNames(0)
 		for _, name := range userEnv {
 			val, _, _ := userReg.GetStringValue(name)
