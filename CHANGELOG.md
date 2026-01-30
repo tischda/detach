@@ -2,7 +2,8 @@
 
 ## [v1.1.1] - 30 January 2026
 
-Make CTRL+C work in detached process
+* Fix CTRL+C not working in detached process
+* Add integration test
 
 ## [v1.1.0] - 16 September 2025
 
