@@ -72,5 +72,9 @@ EXAMPLES:`)
 	}
 
 	// process
-	detach(os.Args[1], os.Args[2:])
+	pid, err := detach(os.Args[1:])
+	if err != nil {
+		log.Fatalln(err)
+	}
+	log.Printf("Started detached process %v with PID %d\n", os.Args[1:], pid)
 }

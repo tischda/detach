@@ -3,47 +3,43 @@
 package main
 
 import (
-	"log"
+	"errors"
+	"fmt"
 	"os/exec"
 
 	"golang.org/x/sys/windows"
 )
 
-// detach starts a new process specified by cmdPath and cmdArgs in a detached state on Windows.
+// detach starts a new process specified by cmd in a detached state on Windows.
 // The new process will not be attached to the current console and will run independently.
 //
 // The process will also inherit a new set of user and system environment variables.
 //
 // Parameters:
-//   - cmdPath: The path to the executable to run.
-//   - cmdArgs: The arguments to pass to the executable.
+//   - cmd: The executable to run and its arguments as a slice of strings.
 //
-// The function logs fatal errors if process creation or release fails.
-func detach(cmdPath string, cmdArgs []string) {
+// The function returns the process ID of the new process or an error if the process creation fails.
+func detach(cmd []string) (int, error) {
+	if len(cmd) == 0 {
+		return 0, errors.New("command array is empty")
+	}
+	c := exec.Command(cmd[0], cmd[1:]...)
+
+	c.SysProcAttr = &windows.SysProcAttr{
+		CreationFlags: windows.DETACHED_PROCESS,
+	}
+
+	// prepare environment for process
 	env, err := getUserAndSystemEnv()
 	if err != nil {
-		log.Fatalln("Failed to get environment:", err)
+		return 0, fmt.Errorf("failed to get environment: %w", err)
 	}
+	c.Env = env
 
-	cmd := exec.Command(cmdPath, cmdArgs...)
-	cmd.SysProcAttr = &windows.SysProcAttr{
-		CreationFlags: windows.CREATE_NEW_PROCESS_GROUP | windows.DETACHED_PROCESS,
-	}
-	cmd.Env = env
-
-	cmd.Stdout = nil
-	cmd.Stderr = nil
-	cmd.Stdin = nil
-
-	err = cmd.Start()
+	// start process
+	err = c.Start()
 	if err != nil {
-		log.Fatalln("Failed to start process:", err)
+		return 0, fmt.Errorf("failed to start command %v : %w", cmd, err)
 	}
-
-	err = cmd.Process.Release()
-	if err != nil {
-		log.Fatalln("Failed to release process:", err)
-	}
-
-	log.Printf("Started detached process '%s' with PID %d\n", cmdPath, cmd.Process.Pid)
+	return c.Process.Pid, nil
 }
