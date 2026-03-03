@@ -72,7 +72,7 @@ EXAMPLES:`)
 	}
 
 	// process
-	pid, err := detach(os.Args[1:])
+	pid, err := executeCommand(os.Args[1:])
 	if err != nil {
 		log.Fatalln(err)
 	}

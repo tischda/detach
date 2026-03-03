@@ -15,7 +15,7 @@ func TestDetachIntegration(t *testing.T) {
 	cmd := []string{"cmd", "/c", "C:\\Windows\\SysWOW64\\timeout.exe", "/T", "3", "/NOBREAK"}
 
 	// Detach the process
-	pid, err := detach(cmd)
+	pid, err := executeCommand(cmd)
 	if err != nil {
 		t.Fatalf("Failed to detach process: %v", err)
 	}

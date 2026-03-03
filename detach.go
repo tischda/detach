@@ -10,7 +10,7 @@ import (
 	"golang.org/x/sys/windows"
 )
 
-// detach starts a new process specified by cmd in a detached state on Windows.
+// executeCommand starts a new process specified by cmd in a detached state on Windows.
 // The new process will not be attached to the current console and will run independently.
 //
 // The process will also inherit a new set of user and system environment variables.
@@ -19,7 +19,7 @@ import (
 //   - cmd: The executable to run and its arguments as a slice of strings.
 //
 // The function returns the process ID of the new process or an error if the process creation fails.
-func detach(cmd []string) (int, error) {
+func executeCommand(cmd []string) (int, error) {
 	if len(cmd) == 0 {
 		return 0, errors.New("command array is empty")
 	}

@@ -2,7 +2,7 @@
 [![Test Status](https://github.com/tischda/detach/actions/workflows/test.yml/badge.svg)](https://github.com/tischda/detach/actions/workflows/test.yml)
 [![Coverage Status](https://coveralls.io/repos/tischda/detach/badge.svg)](https://coveralls.io/r/tischda/detach)
 [![Linter Status](https://github.com/tischda/detach/actions/workflows/linter.yml/badge.svg)](https://github.com/tischda/detach/actions/workflows/linter.yml)
-[![License](https://img.shields.io/github/license/tischda/detach)](/LICENSE)
+[![License](https://img.shields.io/github/license/tischda/detach.svg)](/LICENSE)
 [![Release](https://img.shields.io/github/release/tischda/detach.svg)](https://github.com/tischda/detach/releases/latest)
 
 # detach
